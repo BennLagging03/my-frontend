@@ -1,8 +1,13 @@
 "use client";
 import { useState, useEffect } from "react";
 
+interface Task {
+  title: string;
+  done: boolean;
+}
+
 export default function Home() {
-  const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState<Task[]>([]);
   const [title, setTitle] = useState("");
 
   async function fetchTasks() {
@@ -26,7 +31,7 @@ export default function Home() {
     fetchTasks();
   }
 
-  async function deleteTask(id) {
+  async function deleteTask(id: number) {
     await fetch(`https://my-api-production-9f28.up.railway.app/tasks/${id}`, {
       method: "DELETE",
     });
@@ -48,7 +53,7 @@ export default function Home() {
         </button>
       </div>
       <ul style={{ listStyle: "none", padding: 0 }}>
-        {tasks.map((task, i) => (
+        {tasks.map((task: Task, i: number) => (
           <li
             key={i}
             style={{
