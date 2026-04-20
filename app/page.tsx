@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 
 interface Task {
+  id: number;
   title: string;
   done: boolean;
 }
@@ -53,9 +54,9 @@ export default function Home() {
         </button>
       </div>
       <ul style={{ listStyle: "none", padding: 0 }}>
-        {tasks.map((task: Task, i: number) => (
+        {tasks.map((task: Task) => (
           <li
-            key={i}
+            key={task.id}
             style={{
               display: "flex",
               justifyContent: "space-between",
@@ -64,10 +65,12 @@ export default function Home() {
             }}
           >
             {task.title}
-            <button onClick={() => deleteTask(i)}>Delete</button>
+            <button onClick={() => deleteTask(task.id)}>Delete</button>
           </li>
         ))}
       </ul>
     </main>
+  );
+}
   );
 }
